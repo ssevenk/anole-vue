@@ -1,5 +1,5 @@
 <template>
-  <div :style="style">
+  <div>
     <slot></slot>
   </div>
 </template>
@@ -13,30 +13,15 @@ export default {
       type: Array
     },
   },
-
-  computed: {
-    style() {
-      const [fontSize1,fontSize2,fontSize3] = this.fontSize
-      return {
-        "--fontSize1": fontSize1,
-        "--fontSize2": fontSize2,
-        "--fontSize3": fontSize3,
-      };
-    }
+  
+  created(){
+    const fontSize = this.fontSize
+    const rootFontSizeS = fontSize[0] || '12px'
+    const rootFontSizeM = fontSize[1] || '14px'
+    const rootFontSizeL = fontSize[2] || '16px'
+    document.documentElement.style.setProperty('--rootFontSizeS',rootFontSizeS)
+    document.documentElement.style.setProperty('--rootFontSizeM',rootFontSizeM)
+    document.documentElement.style.setProperty('--rootFontSizeL',rootFontSizeL)
   }
 };
 </script>
-
-<style lang="scss">
-  html {
-    @media screen and(max-width:700px){
-      font-size:var(--fontSize1)
-    }
-    @media screen and(min-width:701px) and (max-width: 800px){
-      font-size:var(--fontSize2)
-    }
-    @media screen and(min-width: 801px){
-      font-size:var(--fontSize3)
-    }
-  }
-</style>

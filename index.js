@@ -1,8 +1,8 @@
 // 导入所有组件
-import Room from './src/room'
+import Container from './src/container'
 import Root from './src/root'
 
-const components = [Room]
+const components = [Container]
 const install = function (vue) {
     /* istanbul ignore if */
     if (install.installed) return;
@@ -17,6 +17,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 export {
-    Room,
+    Container,
     Root
 }

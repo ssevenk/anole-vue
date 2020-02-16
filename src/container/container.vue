@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" class="container">
+  <div :style="style" class="anole-container">
     <slot></slot>
   </div>
 </template>
@@ -37,24 +37,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-@media screen and(max-width:700px) {
-  .container {
-    width: var(--sw);
-    height: var(--sh);
-  }
-}
-@media screen and(min-width:701px) and (max-width: 800px) {
-  .container {
-    width: var(--mw);
-    height: var(--mh);
-  }
-}
-@media screen and(min-width: 801px) {
-  .container {
-    width: var(--lw);
-    height: var(--lh);
-  }
-}
-</style>
