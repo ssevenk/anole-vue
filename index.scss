@@ -1,27 +1,70 @@
 @media screen and(max-width:700px) {
     html {
-        font-size: var(--rootFontSizeS);
+        font-size: var(--root-small-font-size);
     }
-    .anole-container {
+    .anole {
       width: var(--sw);
       height: var(--sh);
+    }
+    .anole-button {
+      padding: var(--small-padding);
+      font-size: var(--small-font-size);
     }
   }
   @media screen and(min-width:701px) and (max-width: 800px) {
     html {
-        font-size: var(--rootFontSizeM);
+        font-size: var(--root-medium-font-size);
     }
-    .anole-container {
+    .anole {
       width: var(--mw);
       height: var(--mh);
+    }
+    .anole-button {
+      padding: var(--medium-padding);
+      font-size: var(--medium-font-size);
     }
   }
   @media screen and(min-width: 801px) {
     html {
-        font-size: var(--rootFontSizeL);
+        font-size: var(--root-large-font-size);
     }
-    .anole-container {
+    .anole {
       width: var(--lw);
       height: var(--lh);
     }
+    .anole-button {
+      padding: var(--large-padding);
+      font-size: var(--large-font-size);
+    }
   }
+
+.anole-container {
+  display: flex;
+}
+
+.anole-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+  border:none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  transition: .1s;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  border-radius: 4px;
+  background-color:var(--color);
+
+  &:hover {
+      background-color:var(--hoverColor);
+  }
+
+  &:active {
+    background-color:var(--color)
+  }
+}

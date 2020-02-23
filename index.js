@@ -1,6 +1,8 @@
 // 导入所有组件
 import Container from './src/container'
 import Root from './src/root'
+import Button from './src/button'
+import Input from './src/input'
 
 const components = [Container]
 const install = function (vue) {
@@ -18,5 +20,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export {
     Container,
-    Root
+    Root,
+    Button,
+    Input
 }

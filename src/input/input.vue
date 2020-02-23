@@ -1,12 +1,10 @@
 <template>
-  <div :style="style" class="anole anole-container">
-    <slot></slot>
-  </div>
+  <input :style="style" class="anole anole-container">
 </template>
 
 <script>
 export default {
-  name: "Room",
+  name: "Input",
 
   props: {
     width: {
