@@ -1,36 +1,19 @@
 /* eslint-disable vue/valid-template-root */
 <template>
-  <Base
-    :width = 'computedWidth'
-    :height = 'computedheight'
-    :padding = 'computedPadding'
-    :fontSize = 'computedFontSize'
-    :margin = 'margin'
-  >
     <button
         class="anole-button"
         :style="style"
     >
       <span><slot></slot></span>
     </button>
-  </Base>
 </template>
 
 <script>
-import Base from '../base/index.vue';
+import { getValue, createStyle } from '../common/api';
 
 export default {
   name: 'Button',
-  components: {
-    Base,
-  },
   props: {
-    width: {
-      type: [Array, String],
-    },
-    height: {
-      type: [Array, String],
-    },
     padding: {
       type: [Array, String],
     },
@@ -43,7 +26,7 @@ export default {
     },
     size: {
       type: [Array, String],
-      default: 'normal',
+      default: () => ['mini', 'normal', 'large'],
     },
     color: {
       type: String,
@@ -54,92 +37,37 @@ export default {
       default: 'rgb(214, 214, 214)',
     },
   },
+  data() {
+    
+  }
 
   computed: {
     style() {
-      return {
-        '--small-font-size': this.smallFontSize,
-        '--medium-font-size': this.mediumFontSize,
-        '--large-font-size': this.largeFontSize,
-        '--small-padding': this.smallPadding,
-        '--medium-padding': this.mediumPadding,
-        '--large-padding': this.largePadding,
-        '--color': this.color,
-        '--hoverColor': this.hoverColor,
-      };
-    },
-    smallFontSize() {
-      if (Array.isArray(this.fontSize)) {
-        return this.fontSize[0];
-      }
-      if (this.fontSize) {
-        return this.fontSize;
-      }
-      const sizeStyle = this.getSizeStyle(this.size, 0);
-      return sizeStyle.fontSize;
-    },
-    mediumFontSize() {
-      if (Array.isArray(this.fontSize)) {
-        return this.fontSize[1];
-      }
-      if (this.fontSize) {
-        return this.fontSize;
-      }
-      const sizeStyle = this.getSizeStyle(this.size, 1);
-      return sizeStyle.fontSize;
-    },
-    largeFontSize() {
-      if (Array.isArray(this.fontSize)) {
-        return this.fontSize[2];
-      }
-      if (this.fontSize) {
-        return this.fontSize;
-      }
-      const sizeStyle = this.getSizeStyle(this.size, 2);
-      return sizeStyle.fontSize;
-    },
-    smallPadding() {
-      if (Array.isArray(this.padding)) {
-        return this.padding[0];
-      }
-      if (this.fontSize) {
-        return this.padding;
-      }
-      const sizeStyle = this.getSizeStyle(this.size, 0);
-      return sizeStyle.padding;
-    },
-    mediumPadding() {
-      if (Array.isArray(this.padding)) {
-        return this.padding[1];
-      }
-      if (this.fontSize) {
-        return this.padding;
-      }
-      const sizeStyle = this.getSizeStyle(this.size, 1);
-      return sizeStyle.padding;
-    },
-    largePadding() {
-      if (Array.isArray(this.padding)) {
-        return this.padding[2];
-      }
-      if (this.fontSize) {
-        return this.padding;
-      }
-      const sizeStyle = this.getSizeStyle(this.size, 2);
-      return sizeStyle.padding;
+      const valueArray = ['margin', 'padding', 'fontSize', 'color', 'hoverColor'];
+      return createStyle(valueArray, this);
     },
   },
+  created() {
+    if (this.padding && this.fontSize) {
+      return;
+    }
+    const padding = [];
+    const fontSize = [];
+    for (let i = 0; i <= 2; i++) {
+      const sizeStyle = this.getSizeStyle(i);
+      padding.push(sizeStyle.padding);
+      fontSize.push(sizeStyle.fontSize);
+    }
+    if (!this.padding) {
+      this.padding = padding;
+    }
+    if (!this.fontSize) {
+      this.fontSize = fontSize;
+    }
+  },
   methods: {
-    getSizeStyle(size, index) {
-      let str;
-      if (!size) {
-        str = '';
-      }
-      if (!size[index]) {
-        str = size;
-      } else {
-        str = size[index];
-      }
+    getSizeStyle(index) {
+      const str = getValue(this.size, index);
       switch (str) {
         case 'mini':
           return {
@@ -169,6 +97,5 @@ export default {
       }
     },
   },
-
 };
 </script>
