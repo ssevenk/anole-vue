@@ -1,100 +1,174 @@
+/* eslint-disable vue/valid-template-root */
 <template>
-  <button
-    class="anole anole-button">
-    <span><slot></slot></span>
-  </button>
+  <Base
+    :width = 'computedWidth'
+    :height = 'computedheight'
+    :padding = 'computedPadding'
+    :fontSize = 'computedFontSize'
+    :margin = 'margin'
+  >
+    <button
+        class="anole-button"
+        :style="style"
+    >
+      <span><slot></slot></span>
+    </button>
+  </Base>
 </template>
 
 <script>
-export default {
-  name: "Button",
+import Base from '../base/index.vue';
 
+export default {
+  name: 'Button',
+  components: {
+    Base,
+  },
   props: {
-    size: {
-      type: Array || String
+    width: {
+      type: [Array, String],
     },
-    fontSize: {
-      type: Array || String
+    height: {
+      type: [Array, String],
     },
     padding: {
-      type: Array || String
+      type: [Array, String],
     },
-    color:{
-      type:String,
-      default:'rgb(179, 179, 179)'
+    margin: {
+      type: [Array, String],
     },
-    hoverColor:{
-      type:String,
-      default:'rgb(214, 214, 214)'
-    }
+    fontSize: {
+      type: [Array, String],
+      default: '1rem',
+    },
+    size: {
+      type: [Array, String],
+      default: 'normal',
+    },
+    color: {
+      type: String,
+      default: 'rgb(179, 179, 179)',
+    },
+    hoverColor: {
+      type: String,
+      default: 'rgb(214, 214, 214)',
+    },
   },
 
   computed: {
     style() {
       return {
-        "--small-font-size": this.smallFontSize,
-        "--medium-font-size": this.mediumFontSize,
-        "--large-font-size": this.largeFontSize,
-        "--small-padding": this.smallPadding,
-        "--medium-padding": this.mediumPadding,
-        "--large-padding": this.largePadding,
-        "--color": this.color,
-        "--activeColFor": this.hoverColor
+        '--small-font-size': this.smallFontSize,
+        '--medium-font-size': this.mediumFontSize,
+        '--large-font-size': this.largeFontSize,
+        '--small-padding': this.smallPadding,
+        '--medium-padding': this.mediumPadding,
+        '--large-padding': this.largePadding,
+        '--color': this.color,
+        '--hoverColor': this.hoverColor,
       };
     },
     smallFontSize() {
-      const sizeStyle = this.getSizeStyle(this.size[0] || this.size || '')
-      return this.fontSize[0] || this.fontSize || sizeStyle.fontSize
+      if (Array.isArray(this.fontSize)) {
+        return this.fontSize[0];
+      }
+      if (this.fontSize) {
+        return this.fontSize;
+      }
+      const sizeStyle = this.getSizeStyle(this.size, 0);
+      return sizeStyle.fontSize;
     },
     mediumFontSize() {
-      const sizeStyle = this.getSizeStyle(this.size[1] || this.size || '')
-      return this.fontSize[1] || this.fontSize || sizeStyle.fontSize
+      if (Array.isArray(this.fontSize)) {
+        return this.fontSize[1];
+      }
+      if (this.fontSize) {
+        return this.fontSize;
+      }
+      const sizeStyle = this.getSizeStyle(this.size, 1);
+      return sizeStyle.fontSize;
     },
     largeFontSize() {
-      const sizeStyle = this.getSizeStyle(this.size[2] || this.size || '')
-      return this.fontSize[2] || this.fontSize || sizeStyle.fontSize
+      if (Array.isArray(this.fontSize)) {
+        return this.fontSize[2];
+      }
+      if (this.fontSize) {
+        return this.fontSize;
+      }
+      const sizeStyle = this.getSizeStyle(this.size, 2);
+      return sizeStyle.fontSize;
     },
     smallPadding() {
-      const sizeStyle = this.getSizeStyle(this.size[2] || this.size || '')
-      return this.padding[0] || this.padding || sizeStyle.fontSize
+      if (Array.isArray(this.padding)) {
+        return this.padding[0];
+      }
+      if (this.fontSize) {
+        return this.padding;
+      }
+      const sizeStyle = this.getSizeStyle(this.size, 0);
+      return sizeStyle.padding;
     },
     mediumPadding() {
-      const sizeStyle = this.getSizeStyle(this.size[1] || this.size || '')
-      return this.padding[1] || this.padding|| sizeStyle.padding
+      if (Array.isArray(this.padding)) {
+        return this.padding[1];
+      }
+      if (this.fontSize) {
+        return this.padding;
+      }
+      const sizeStyle = this.getSizeStyle(this.size, 1);
+      return sizeStyle.padding;
     },
     largePadding() {
-      const sizeStyle = this.getSizeStyle(this.size[2] || this.size || '')
-      return this.padding[2] || this.padding || sizeStyle.padding
+      if (Array.isArray(this.padding)) {
+        return this.padding[2];
+      }
+      if (this.fontSize) {
+        return this.padding;
+      }
+      const sizeStyle = this.getSizeStyle(this.size, 2);
+      return sizeStyle.padding;
     },
   },
-  getSizeStyle(size) {
-      switch(size){
+  methods: {
+    getSizeStyle(size, index) {
+      let str;
+      if (!size) {
+        str = '';
+      }
+      if (!size[index]) {
+        str = size;
+      } else {
+        str = size[index];
+      }
+      switch (str) {
         case 'mini':
           return {
-            fontSize:'12px',
-            padding:'6px 12px'
-          }
+            fontSize: '12px',
+            padding: '6px 12px',
+          };
         case 'small':
           return {
-            fontSize:'13px',
-            padding:'8px 14px'
-          }
+            fontSize: '13px',
+            padding: '8px 14px',
+          };
         case 'normal':
           return {
-            fontSize:'14px',
-            padding:'10px 16px'
-          }
+            fontSize: '14px',
+            padding: '10px 16px',
+          };
         case 'large':
           return {
-            fontSize:'16px',
-            padding:'14px 20px'
-          }
+            fontSize: '16px',
+            padding: '14px 20px',
+          };
         default:
           return {
-            fontSize:'14px',
-            padding:'10px 16px'
-          }
+            fontSize: '14px',
+            padding: '10px 16px',
+          };
       }
-  }
+    },
+  },
+
 };
 </script>

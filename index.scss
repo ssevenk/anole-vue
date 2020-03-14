@@ -1,19 +1,23 @@
 @media screen and(max-width:700px) {
     html {
-        font-size: var(--root-small-font-size);
+        font-size: var(--root-small-fontSize);
     }
     .anole {
       width: var(--sw);
       height: var(--sh);
-    }
-    .anole-button {
       padding: var(--small-padding);
-      font-size: var(--small-font-size);
+      margin: var(--small-margin);
+      font-size: var(--small-fontSize);
+    }
+    .anole-container {
+      justify-content: var(--small-jusifyContent);
+      align-items: var(--small-alignItems);
+      align-content: var(--small-alignContent);
     }
   }
   @media screen and(min-width:701px) and (max-width: 800px) {
     html {
-        font-size: var(--root-medium-font-size);
+        font-size: var(--root-medium-fontSize);
     }
     .anole {
       width: var(--mw);
@@ -21,12 +25,12 @@
     }
     .anole-button {
       padding: var(--medium-padding);
-      font-size: var(--medium-font-size);
+      font-size: var(--medium-fontSize);
     }
   }
   @media screen and(min-width: 801px) {
     html {
-        font-size: var(--root-large-font-size);
+        font-size: var(--root-large-fontSize);
     }
     .anole {
       width: var(--lw);
@@ -34,12 +38,13 @@
     }
     .anole-button {
       padding: var(--large-padding);
-      font-size: var(--large-font-size);
+      font-size: var(--large-fontSize);
     }
   }
 
 .anole-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .anole-button {

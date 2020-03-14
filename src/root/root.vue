@@ -5,23 +5,24 @@
 </template>
 
 <script>
+import { getValue } from '../common/api';
+
 export default {
-  name: "Root",
+  name: 'Root',
 
   props: {
     fontSize: {
-      type: Array
+      type: [Array, String],
+      default: () => ['12px', '13px', '14px'],
     },
   },
-  
-  created(){
-    const fontSize = this.fontSize
-    const rootFontSizeS = fontSize[0] || '12px'
-    const rootFontSizeM = fontSize[1] || '14px'
-    const rootFontSizeL = fontSize[2] || '16px'
-    document.documentElement.style.setProperty('--rootFontSizeS',rootFontSizeS)
-    document.documentElement.style.setProperty('--rootFontSizeM',rootFontSizeM)
-    document.documentElement.style.setProperty('--rootFontSizeL',rootFontSizeL)
-  }
+
+  created() {
+    const { fontSize } = this;
+    const keyArray = ['--root-small-fontSize', '--root-medium-fontSize', '--root-large-fontSize'];
+    keyArray.forEach((item, index) => {
+      document.documentElement.style.setProperty(item, getValue(fontSize, index));
+    });
+  },
 };
 </script>

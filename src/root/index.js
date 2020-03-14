@@ -6,4 +6,3 @@ Root.install = function (Vue) {
 };
 
 export default Root;
-

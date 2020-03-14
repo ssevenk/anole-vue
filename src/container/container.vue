@@ -1,45 +1,70 @@
+/* eslint-disable vue/valid-template-root */
 <template>
-  <div :style="style" class="anole anole-container">
-    <slot></slot>
-  </div>
+  <Base
+    :width='width'
+    :height='height'
+    :margin='margin'
+    :padding='padding'
+    :fontSize='fontSize'
+  >
+    <div
+        class="anole-container"
+        :style="style"
+    >
+      <slot></slot>
+    </div>
+  </Base>
 </template>
 
 <script>
-export default {
-  name: "Room",
+import Base from '../common/base.vue';
+import { createStyle } from '../common/api';
 
+export default {
+  name: 'Room',
+  components: {
+    Base,
+  },
   props: {
     width: {
-      type: Array
+      type: [Array, String],
+      default: '100%',
     },
     height: {
-      type: Array
-    }
+      type: [Array, String],
+      default: '100%',
+    },
+    padding: {
+      type: [Array, String],
+      default: '0',
+    },
+    margin: {
+      type: [Array, String],
+      default: '0',
+    },
+    fontSize: {
+      type: [Array, String],
+      default: '1rem',
+    },
+    justifyContent: {
+      type: [Array, String],
+      default: 'start',
+    },
+    alignItems: {
+      type: [Array, String],
+      default: 'start',
+    },
+    aligenContent: {
+      type: [Array, String],
+      default: 'start',
+    },
   },
 
   computed: {
     style() {
-      const sw = this.width[0] || '100%'
-      const mw = this.width[1] || '100%'
-      const lw = this.width[2] || '100%'
-      const sh = this.height[0] || '100%'
-      const mh = this.height[1] || '100%'
-      const lh = this.height[2] || '100%'
-      return {
-        "--sw": sw,
-        "--mw": mw,
-        "--lw": lw,
-        "--sh": sh,
-        "--mh": mh,
-        "--lh": lh
-      };
-    }
-  }
+      const valueArray = ['justifyContent', 'alignItems', 'aligenContent'];
+      return createStyle(valueArray, this);
+    },
+  },
 };
 </script>
-
-<style>
-.anole-container {
-  display: flex;
-}
-</style>
