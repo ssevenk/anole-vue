@@ -2,43 +2,99 @@
     html {
         font-size: var(--root-small-fontSize);
     }
-    .anole {
-      width: var(--sw);
-      height: var(--sh);
+    .anole-container {
+      width: var(--small-width);
+      height: var(--small-height);
       padding: var(--small-padding);
       margin: var(--small-margin);
       font-size: var(--small-fontSize);
-    }
-    .anole-container {
-      justify-content: var(--small-jusifyContent);
+      justify-content: var(--small-justifyContent);
       align-items: var(--small-alignItems);
       align-content: var(--small-alignContent);
+    }
+    .anole-button {
+      padding: var(--small-computedPadding);
+      font-size: var(--small-computedFontSize);
+      margin: var(--small-margin);
+    }
+    .anole-input {
+      width: var(--small-width);
+      height: var(--small-height);
+      font-size: var(--small-fontSize);
+      padding: var(--small-padding);
+      margin: var(--small-margin);
+    }
+    .anole-image {
+      width: var(--small-width);
+      height: var(--small-height);
+      margin: var(--small-margin);
+      background-image: var(--small-src);
     }
   }
   @media screen and(min-width:701px) and (max-width: 800px) {
     html {
         font-size: var(--root-medium-fontSize);
     }
-    .anole {
-      width: var(--mw);
-      height: var(--mh);
+    .anole-container {
+      width: var(--medium-width);
+      height: var(--medium-height);
+      padding: var(--medium-padding);
+      margin: var(--medium-margin);
+      font-size: var(--medium-fontSize);
+      justify-content: var(--medium-justifyContent);
+      align-items: var(--medium-alignItems);
+      align-content: var(--medium-alignContent);
     }
     .anole-button {
-      padding: var(--medium-padding);
+      padding: var(--medium-computedPadding);
+      font-size: var(--medium-computedFontSize);
+      margin: var(--medium-margin);
+    }
+    .anole-input {
+      width: var(--medium-width);
+      height: var(--medium-height);
       font-size: var(--medium-fontSize);
+      padding: var(--medium-padding);
+      margin: var(--medium-margin);
+    }
+    .anole-image {
+      width: var(--medium-width);
+      height: var(--medium-height);
+      margin: var(--medium-margin);
+      background-image: var(--medium-src);
     }
   }
   @media screen and(min-width: 801px) {
     html {
         font-size: var(--root-large-fontSize);
     }
-    .anole {
-      width: var(--lw);
-      height: var(--lh);
+    .anole-container {
+      width: var(--large-width);
+      height: var(--large-height);
+      padding: var(--large-padding);
+      margin: var(--large-margin);
+      font-size: var(--large-fontSize);
+      justify-content: var(--large-justifyContent);
+      align-items: var(--large-alignItems);
+      align-content: var(--large-alignContent);
     }
     .anole-button {
-      padding: var(--large-padding);
+      padding: var(--large-computedPadding);
+      font-size: var(--large-computedFontSize);
+      margin: var(--large-margin);
+    }
+    .anole-input {
+      width: var(--large-width);
+      height: var(--large-height);
       font-size: var(--large-fontSize);
+      padding: var(--large-padding);
+      margin: var(--large-margin);
+    }
+    .anole-image {
+      width: var(--large-width);
+      height: var(--large-height);
+      margin: var(--large-margin);
+      background-image: var(--large-src);
     }
   }
 
@@ -48,7 +104,7 @@
 }
 
 .anole-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
@@ -63,13 +119,40 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   border-radius: 4px;
-  background-color:var(--color);
+  color: var(--fontColor);
+  background-color:var(--backgroundColor);
 
   &:hover {
       background-color:var(--hoverColor);
   }
 
   &:active {
-    background-color:var(--color)
+    background-color:var(--backgroundColor)
   }
+}
+
+.anole-input {
+  -webkit-appearance: none;
+    background-color: rgb(255, 255, 255);
+    background-image: none;
+    box-sizing: border-box;
+    display: inline-flex;
+    font-size: inherit;
+    align-items: center;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    outline: none;
+    padding: 0px 15px;
+    border-color: var(--borderColor);
+    color: var(--fontColor);
+
+    &:focus {
+      border-color:var(--focusColor);
+    }
+}
+
+.anole-image {
+  background-size: 100% 100%;
+  display: inline-block;
 }

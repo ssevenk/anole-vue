@@ -1,8 +1,8 @@
-import Input from './input.vue';
+import AInput from './input.vue';
 
 /* istanbul ignore next */
-Input.install = function (Vue) {
-  Vue.component(Input.name, Input);
+AInput.install = function (Vue) {
+  Vue.component(AInput.name, AInput);
 };
 
-export default Input;
+export default AInput;

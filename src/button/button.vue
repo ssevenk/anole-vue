@@ -1,10 +1,6 @@
-/* eslint-disable vue/valid-template-root */
 <template>
-    <button
-        class="anole-button"
-        :style="style"
-    >
-      <span><slot></slot></span>
+    <button class="anole-button" :style="style">
+      <slot></slot>
     </button>
 </template>
 
@@ -19,36 +15,55 @@ export default {
     },
     margin: {
       type: [Array, String],
+      default: '0',
     },
     fontSize: {
       type: [Array, String],
-      default: '1rem',
     },
     size: {
       type: [Array, String],
-      default: () => ['mini', 'normal', 'large'],
+      default: () => ['small', 'normal', 'large'],
     },
-    color: {
+    backgroundColor: {
       type: String,
-      default: 'rgb(179, 179, 179)',
+      default: 'rgb(210, 210, 210)',
     },
     hoverColor: {
       type: String,
-      default: 'rgb(214, 214, 214)',
+      default: 'rgb(224, 224, 224)',
+    },
+    fontColor: {
+      type: String,
+      default: 'rgb(31, 47, 61)',
     },
   },
   data() {
-    
-  }
+    return {
+      computedPadding: null,
+      computedFontSize: null,
+    };
+  },
 
   computed: {
     style() {
-      const valueArray = ['margin', 'padding', 'fontSize', 'color', 'hoverColor'];
-      return createStyle(valueArray, this);
+      const valueArray = ['margin', 'computedPadding', 'computedFontSize'];
+      const styleObj = createStyle(valueArray, this);
+      return {
+        ...styleObj,
+        '--backgroundColor': this.backgroundColor,
+        '--hoverColor': this.hoverColor,
+        '--fontColor': this.fontColor,
+      };
     },
   },
   created() {
-    if (this.padding && this.fontSize) {
+    if (this.padding) {
+      this.computedPadding = this.padding;
+    }
+    if (this.fontSize) {
+      this.computedFontSize = this.fontSize;
+    }
+    if (this.computedPadding && this.computedFontSize) {
       return;
     }
     const padding = [];
@@ -59,40 +74,35 @@ export default {
       fontSize.push(sizeStyle.fontSize);
     }
     if (!this.padding) {
-      this.padding = padding;
+      this.computedPadding = padding;
     }
     if (!this.fontSize) {
-      this.fontSize = fontSize;
+      this.computedFontSize = fontSize;
     }
   },
   methods: {
     getSizeStyle(index) {
       const str = getValue(this.size, index);
       switch (str) {
-        case 'mini':
-          return {
-            fontSize: '12px',
-            padding: '6px 12px',
-          };
         case 'small':
           return {
-            fontSize: '13px',
-            padding: '8px 14px',
+            fontSize: '12px',
+            padding: '4px 10px',
           };
         case 'normal':
           return {
-            fontSize: '14px',
-            padding: '10px 16px',
+            fontSize: '13px',
+            padding: '5px 12px',
           };
         case 'large':
           return {
-            fontSize: '16px',
-            padding: '14px 20px',
+            fontSize: '14px',
+            padding: '6px 14px',
           };
         default:
           return {
-            fontSize: '14px',
-            padding: '10px 16px',
+            fontSize: '13px',
+            padding: '6px 12px',
           };
       }
     },

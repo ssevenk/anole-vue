@@ -1,30 +1,14 @@
-/* eslint-disable vue/valid-template-root */
 <template>
-  <Base
-    :width='width'
-    :height='height'
-    :margin='margin'
-    :padding='padding'
-    :fontSize='fontSize'
-  >
-    <div
-        class="anole-container"
-        :style="style"
-    >
+    <div class="anole-container" :style="style">
       <slot></slot>
     </div>
-  </Base>
 </template>
 
 <script>
-import Base from '../common/base.vue';
 import { createStyle } from '../common/api';
 
 export default {
   name: 'Room',
-  components: {
-    Base,
-  },
   props: {
     width: {
       type: [Array, String],
@@ -48,21 +32,23 @@ export default {
     },
     justifyContent: {
       type: [Array, String],
-      default: 'start',
+      default: 'flex-start',
     },
     alignItems: {
       type: [Array, String],
-      default: 'start',
+      default: 'flex-start',
     },
-    aligenContent: {
+    alignContent: {
       type: [Array, String],
-      default: 'start',
+      default: 'flex-start',
     },
   },
 
   computed: {
     style() {
-      const valueArray = ['justifyContent', 'alignItems', 'aligenContent'];
+      const valueArray = [
+        'width', 'height', 'padding', 'margin', 'fontSize', 'justifyContent', 'alignItems', 'alignContent',
+      ];
       return createStyle(valueArray, this);
     },
   },

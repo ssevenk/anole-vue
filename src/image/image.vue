@@ -1,17 +1,12 @@
 <template>
-  <div
-    class="anole"
-    :style="style">
-    <slot></slot>
-  </div>
+    <div class="anole-image" :style="style"></div>
 </template>
 
 <script>
-import { createStyle } from './api';
+import { createStyle } from '../common/api';
 
 export default {
-  name: 'Base',
-
+  name: 'Room',
   props: {
     width: {
       type: [Array, String],
@@ -21,24 +16,25 @@ export default {
       type: [Array, String],
       default: '100%',
     },
-    padding: {
-      type: [Array, String],
-      default: '0',
-    },
     margin: {
       type: [Array, String],
       default: '0',
     },
-    fontSize: {
+    url: {
       type: [Array, String],
-      default: '1rem',
+      default: '',
     },
   },
-
   computed: {
     style() {
-      const valueArray = ['width', 'height', 'padding', 'margin', 'fontSize'];
+      const valueArray = ['width', 'height', 'margin', 'src'];
       return createStyle(valueArray, this);
+    },
+    src() {
+      if (Array.isArray(this.url)) {
+        return this.url.map((item) => `url(${item})`);
+      }
+      return `url(${this.url})`;
     },
   },
 };
