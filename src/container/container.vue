@@ -8,7 +8,7 @@
 import { createStyle } from '../common/api';
 
 export default {
-  name: 'Room',
+  name: 'Container',
   props: {
     width: {
       type: [Array, String],
