@@ -1,7 +1,7 @@
 {
   "name": "anole-vue",
   "description": "响应式ui框架，非栅格系统，使用响应式属性",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "author": "ssevenk",
   "license": "MIT",
   "private": false,
